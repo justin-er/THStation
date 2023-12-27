@@ -1,6 +1,6 @@
 idf_component_register(
         SRCS 
             "main.c" 
-            "../App/TemperatureAndHumidity/THD22.c"
+            "../App/THReader/THReader.c"
         INCLUDE_DIRS "."
     )
