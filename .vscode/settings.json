@@ -3,5 +3,8 @@
   "idf.adapterTargetName": "esp32s3",
   "idf.openOcdConfigs": [
     "board/esp32s3-builtin.cfg"
-  ]
+  ],
+  "files.associations": {
+    "threader.h": "c"
+  }
 }
