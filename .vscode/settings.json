@@ -6,5 +6,7 @@
   ],
   "files.associations": {
     "threader.h": "c"
-  }
+},
+"idf.port": "/dev/cu.usbmodem1301",
+"idf.flashType": "JTAG"
 }
