@@ -38,7 +38,7 @@
 #define GPIO_Default_Octal_PSRAM_01             35
 #define GPIO_Default_Octal_PSRAM_02             36
 #define GPIO_Default_Octal_PSRAM_03             37
-#define GPIO_Default_RGB_LED                    38
+#define GPIO_38_free                            38
 #define GPIO_39_free                            39
 #define GPIO_40_free                            40
 #define GPIO_41_free                            41
@@ -48,4 +48,4 @@
 #define GPIO_45_free                            45
 #define GPIO_46_free                            46
 #define GPIO_47_free                            47
-#define GPIO_48_free                            48
+#define GPIO_Default_RGB_LED                    48

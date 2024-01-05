@@ -6,6 +6,9 @@
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "led_strip.h"
+#include "dht.h"
+#include "salam.h"
 
 #include "App/THReader/THReader.h"
 

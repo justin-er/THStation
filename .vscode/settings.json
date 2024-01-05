@@ -5,7 +5,8 @@
     "board/esp32s3-builtin.cfg"
   ],
   "files.associations": {
-    "threader.h": "c"
+    "threader.h": "c",
+    "led_strip.h": "c"
 },
 "idf.port": "/dev/cu.usbmodem1301",
 "idf.flashType": "JTAG"
