@@ -8,9 +8,9 @@
 #include "freertos/task.h"
 #include "led_strip.h"
 #include "dht.h"
-#include "salam.h"
+// #include "salam.h"
 
-#include "App/THReader/THReader.h"
+#include "THReader.h"
 
 void app_main(void)
 {
