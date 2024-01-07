@@ -8,7 +8,6 @@
 #include "freertos/task.h"
 #include "led_strip.h"
 #include "dht.h"
-// #include "salam.h"
 
 #include "THReader.h"
 
