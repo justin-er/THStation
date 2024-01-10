@@ -6,7 +6,8 @@
   ],
   "files.associations": {
     "threader.h": "c",
-    "led_strip.h": "c"
+    "led_strip.h": "c",
+    "esp_err.h": "c"
 },
 "idf.port": "/dev/cu.usbmodem1301",
 "idf.flashType": "JTAG"

@@ -10,8 +10,10 @@
 #include "dht.h"
 
 #include "THReader.h"
+#include "LEDController.h"
 
 void app_main(void)
 {
     startTHReader();
+    setLED(30, 30, 30);
 }

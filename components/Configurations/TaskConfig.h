@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-typedef struct
-{
+typedef struct {
     int stackSize;
     int priority;
     int coreID;
