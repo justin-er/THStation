@@ -1,5 +1,11 @@
 #include <stdio.h>
 
-void setLED(uint r, uint g, uint b);
-void blinkLED(uint period, uint r, uint g, uint b);
-void clearLED(void) ;
+struct LEDColor {
+    uint red;
+    uint green;
+    uint blue;
+};
+
+void setLED(struct LEDColor color);
+void blinkLED(uint period, struct LEDColor color);
+void clearLED(void);

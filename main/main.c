@@ -15,5 +15,13 @@
 void app_main(void)
 {
     startTHReader();
-    setLED(30, 30, 30);
+
+    struct LEDColor violet = {
+        red: 10, 
+        green: 0, 
+        blue: 20 
+    };
+
+    // setLED(violet);
+    blinkLED(500, violet);
 }

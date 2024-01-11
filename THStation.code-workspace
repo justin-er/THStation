@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+    ],
+    "settings": {
+        "files.associations": {
+            "threader.h": "c",
+            "led_strip.h": "c",
+            "esp_err.h": "c"
+        }
+    }
+}

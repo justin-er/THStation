@@ -12,9 +12,10 @@
 
 #include "GeneralConfig.h"
 #include "GPIOConfig.h"
+#include "LEDController.h"
 // #include "TaskConfig.h"
 
-#define LED_STRIP_LED_NUMBERS       1
+#define LED_STRIP_LED_NUMBERS 1
 
 led_strip_handle_t led_strip;
 
@@ -43,8 +44,10 @@ led_strip_handle_t configure_led(void)
     return led_strip;
 }
 
-void clearLED(void) {
-    if (led_strip == NULL) {
+void clearLED(void)
+{
+    if (led_strip == NULL)
+    {
         led_strip = configure_led();
     }
 
@@ -52,55 +55,38 @@ void clearLED(void) {
     ESP_LOGI(TAG, "LED OFF!");
 }
 
-void blinkLED(uint period, uint r, uint g, uint b) {
-    if (led_strip == NULL) {
-        led_strip = configure_led();
-    }
-
-    ESP_LOGI(TAG, "Start blinking LED strip");
-    while (true) {
-        for (int i = 0; i < LED_STRIP_LED_NUMBERS; i++) {
-                ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, r, g, b));
-            }
-            /* Refresh the strip to send data */
-            ESP_ERROR_CHECK(led_strip_refresh(led_strip));
-            ESP_LOGI(TAG, "LED ON!");
-
-        // if (led_on_off) {
-        //     /* Set the LED pixel using RGB from 0 (0%) to 255 (100%) for each color */
-        //     for (int i = 0; i < LED_STRIP_LED_NUMBERS; i++) {
-        //         ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, r, g, b));
-        //     }
-        //     /* Refresh the strip to send data */
-        //     ESP_ERROR_CHECK(led_strip_refresh(led_strip));
-        //     ESP_LOGI(TAG, "LED ON!");
-        // } else {
-        //     /* Set all LED off to clear all pixels */
-        //     ESP_ERROR_CHECK(led_strip_clear(led_strip));
-        //     ESP_LOGI(TAG, "LED OFF!");
-        // }
-
-        // led_on_off = !led_on_off;
-        // vTaskDelay(pdMS_TO_TICKS(500));
-    }
-
-}
-
-void setLED(uint r, uint g, uint b)
+void blinkLED(uint period, struct LEDColor color)
 {
+    if (led_strip == NULL)
+    {
+        led_strip = configure_led();
+    }
+
+    bool led_on_off = false;
+
+    while (true)
+    {
+        if (led_on_off) {
+            for (int i = 0; i < LED_STRIP_LED_NUMBERS; i++) {
+                ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, color.red, color.green, color.blue));
+            }
+        } else {
+            ESP_ERROR_CHECK(led_strip_clear(led_strip));
+        }
+
+        led_on_off = !led_on_off;
+        vTaskDelay(pdMS_TO_TICKS(500));
+    }
+}
+
+void setLED(struct LEDColor color) {
     if (led_strip == NULL) {
         led_strip = configure_led();
     }
 
-    // bool led_on_off = false;
-
-    ESP_LOGI(TAG, "Start blinking LED strip");
-    while (true) {
-        for (int i = 0; i < LED_STRIP_LED_NUMBERS; i++) {
-                ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, r, g, b));
-            }
-
-            ESP_ERROR_CHECK(led_strip_refresh(led_strip));
-            ESP_LOGI(TAG, "LED ON!");
+    for (int i = 0; i < LED_STRIP_LED_NUMBERS; i++)
+    {
+        ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, color.red, color.green, color.blue));
     }
 }
+
