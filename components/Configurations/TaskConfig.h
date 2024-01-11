@@ -1,13 +1,15 @@
 #include <stdio.h>
 
-typedef struct {
+#ifndef TASK_CONFIG_H
+#define TASK_CONFIG_H
+
+struct TaskConfig {
     int stackSize;
     int priority;
     int coreID;
-} TaskConfig;
-
-TaskConfig thReaderTaskConfig = {
-    .stackSize = 4096,
-    .priority = 1,
-    .coreID = 2
 };
+
+extern struct TaskConfig thReaderTaskConfig;
+extern struct TaskConfig ledControllerTaskConfig;
+
+#endif // TASK_CONFIG_H

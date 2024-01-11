@@ -13,11 +13,15 @@
 #include "GeneralConfig.h"
 #include "GPIOConfig.h"
 #include "LEDController.h"
-// #include "TaskConfig.h"
+#include "TaskConfig.h"
 
 #define LED_STRIP_LED_NUMBERS 1
 
 led_strip_handle_t led_strip;
+TaskHandle_t ledTaskHandle = NULL;
+
+// Function Prototypes
+void blinkLEDHanlder(void *pvParameters);
 
 led_strip_handle_t configure_led(void)
 {
@@ -44,45 +48,56 @@ led_strip_handle_t configure_led(void)
     return led_strip;
 }
 
-void clearLED(void)
-{
-    if (led_strip == NULL)
-    {
+void configLEDIfRequired(void) {
+    if (led_strip == NULL) {
         led_strip = configure_led();
     }
+}
 
+void configLEDControllerTaskIfRequired(void) {
+    static uint8_t ucParameterToPass;
+    xTaskCreate(
+        &blinkLEDHanlder,
+        "LEDControllerTask",
+        ledControllerTaskConfig.stackSize, 
+        &ucParameterToPass,
+        ledControllerTaskConfig.priority,
+        &ledTaskHandle
+    );
+}
+
+void clearLED(void) {
+    configLEDIfRequired();
     ESP_ERROR_CHECK(led_strip_clear(led_strip));
     ESP_LOGI(TAG, "LED OFF!");
 }
 
-void blinkLED(uint period, struct LEDColor color)
-{
-    if (led_strip == NULL)
-    {
-        led_strip = configure_led();
-    }
+void blinkLED (uint period, struct LEDColor color) {
+    vTaskResume(ledTaskHandle);
+}
+
+void blinkLEDHanlder(void *pvParameters) {
+    configLEDIfRequired();
 
     bool led_on_off = false;
 
-    while (true)
-    {
-        if (led_on_off) {
-            for (int i = 0; i < LED_STRIP_LED_NUMBERS; i++) {
-                ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, color.red, color.green, color.blue));
-            }
-        } else {
-            ESP_ERROR_CHECK(led_strip_clear(led_strip));
-        }
+    // while (true)
+    // {
+    //     if (led_on_off) {
+    //         for (int i = 0; i < LED_STRIP_LED_NUMBERS; i++) {
+    //             ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, color.red, color.green, color.blue));
+    //         }
+    //     } else {
+    //         ESP_ERROR_CHECK(led_strip_clear(led_strip));
+    //     }
 
-        led_on_off = !led_on_off;
-        vTaskDelay(pdMS_TO_TICKS(500));
-    }
+    //     led_on_off = !led_on_off;
+    //     vTaskDelay(pdMS_TO_TICKS(500));
+    // }
 }
 
 void setLED(struct LEDColor color) {
-    if (led_strip == NULL) {
-        led_strip = configure_led();
-    }
+    configLEDIfRequired();
 
     for (int i = 0; i < LED_STRIP_LED_NUMBERS; i++)
     {
