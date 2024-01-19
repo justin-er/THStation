@@ -9,6 +9,6 @@
     "led_strip.h": "c",
     "esp_err.h": "c"
 },
-"idf.port": "/dev/cu.usbmodem1301",
+"idf.port": "/dev/cu.usbmodem101",
 "idf.flashType": "JTAG"
 }

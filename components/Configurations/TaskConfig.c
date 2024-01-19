@@ -4,11 +4,11 @@
 struct TaskConfig thReaderTaskConfig = {
     .stackSize = 4096,
     .priority = 1,
-    .coreID = 2
+    .coreID = 1
 };
 
 struct TaskConfig ledControllerTaskConfig = {
-    .stackSize = 1048,
+    .stackSize = 4096,
     .priority = 0,
-    .coreID = 2
+    .coreID = 1
 };

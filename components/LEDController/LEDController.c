@@ -17,7 +17,14 @@
 
 #define LED_STRIP_LED_NUMBERS 1
 
-led_strip_handle_t led_strip;
+typedef struct LEDBlinkModel LEDBlinkModel;
+
+struct LEDBlinkModel {
+    uint period;
+    LEDColor color;
+};
+
+led_strip_handle_t led_strip = NULL;
 TaskHandle_t ledTaskHandle = NULL;
 
 // Function Prototypes
@@ -44,7 +51,6 @@ led_strip_handle_t configure_led(void)
     // LED Strip object handle
     led_strip_handle_t led_strip;
     ESP_ERROR_CHECK(led_strip_new_spi_device(&strip_config, &spi_config, &led_strip));
-    ESP_LOGI(TAG, "Created LED strip object with SPI backend");
     return led_strip;
 }
 
@@ -54,48 +60,6 @@ void configLEDIfRequired(void) {
     }
 }
 
-void configLEDControllerTaskIfRequired(void) {
-    static uint8_t ucParameterToPass;
-    xTaskCreate(
-        &blinkLEDHanlder,
-        "LEDControllerTask",
-        ledControllerTaskConfig.stackSize, 
-        &ucParameterToPass,
-        ledControllerTaskConfig.priority,
-        &ledTaskHandle
-    );
-}
-
-void clearLED(void) {
-    configLEDIfRequired();
-    ESP_ERROR_CHECK(led_strip_clear(led_strip));
-    ESP_LOGI(TAG, "LED OFF!");
-}
-
-void blinkLED (uint period, struct LEDColor color) {
-    vTaskResume(ledTaskHandle);
-}
-
-void blinkLEDHanlder(void *pvParameters) {
-    configLEDIfRequired();
-
-    bool led_on_off = false;
-
-    // while (true)
-    // {
-    //     if (led_on_off) {
-    //         for (int i = 0; i < LED_STRIP_LED_NUMBERS; i++) {
-    //             ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, color.red, color.green, color.blue));
-    //         }
-    //     } else {
-    //         ESP_ERROR_CHECK(led_strip_clear(led_strip));
-    //     }
-
-    //     led_on_off = !led_on_off;
-    //     vTaskDelay(pdMS_TO_TICKS(500));
-    // }
-}
-
 void setLED(struct LEDColor color) {
     configLEDIfRequired();
 
@@ -103,5 +67,59 @@ void setLED(struct LEDColor color) {
     {
         ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, color.red, color.green, color.blue));
     }
+
+    ESP_ERROR_CHECK(led_strip_refresh(led_strip));
 }
 
+void clearLED(void) {
+    ESP_ERROR_CHECK(led_strip_clear(led_strip));    
+}
+
+void startLEDBlinking (uint period, struct LEDColor color) {
+    configLEDIfRequired();
+
+    static struct LEDBlinkModel model;
+    model.period = period;
+    model.color = color;
+
+    if (ledTaskHandle != NULL) {
+        vTaskResume(ledTaskHandle);
+        return;
+    }
+
+    xTaskCreate(
+        &blinkLEDHanlder,
+        "LEDController_BlinkingTask",
+        ledControllerTaskConfig.stackSize, 
+        &model,
+        ledControllerTaskConfig.priority,
+        &ledTaskHandle
+    );
+}
+
+void stopLEDBlinking() {
+    if (ledTaskHandle != NULL) {
+        vTaskDelete(ledTaskHandle);
+        ledTaskHandle = NULL;
+    }
+    
+    clearLED();
+}
+
+void blinkLEDHanlder(void *pvParameters) {
+    LEDBlinkModel *model = (LEDBlinkModel *)pvParameters;
+    
+    bool led_on_off = false;
+
+    while (true)
+    {
+        if (led_on_off) {
+            setLED(model->color);
+        } else {
+            clearLED();
+        }
+
+        led_on_off = !led_on_off;
+        vTaskDelay(pdMS_TO_TICKS(500));
+    }
+}
