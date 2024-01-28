@@ -15,7 +15,8 @@
             "string": "c",
             "unordered_map": "c",
             "vector": "c",
-            "system_error": "c"
+            "system_error": "c",
+            "esp_netif.h": "c"
         }
     }
 }

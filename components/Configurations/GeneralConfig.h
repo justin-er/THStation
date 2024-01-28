@@ -1,2 +1,2 @@
 
-static const char *TAG = "THStations";
+// static const char *TAG = "THStations";
