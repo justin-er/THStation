@@ -1,5 +1,5 @@
 idf_component_register(
     SRCS WiFiController.c
     INCLUDE_DIRS .
-    REQUIRES Configurations esp_netif
+    REQUIRES esp_netif Configurations LEDController
 )

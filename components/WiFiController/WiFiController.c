@@ -3,6 +3,13 @@
 #include <freertos/task.h>
 
 #include "esp_netif.h"
+#include "esp_err.h"
+#include "esp_log.h"
+#include "esp_netif.h"
+#include "lwip/netdb.h"
+
+#include "LEDController.h"
+#include "WiFiController.h"
 
 #define wifiAP_SSID                 "ESP32SSID"
 #define wifiAP_SSIDMaxLength        32
@@ -18,20 +25,22 @@
 #define wifiAPBandwidth             WIFI_BW_HT20
 #define wifiConnectionRetryNumbers  5
 
-extern esp_netif_t* espSTANetworkInterface;
+const char* tag = "WifiController";
+const LEDColor wifiStartingColor = { red: 5, green: 0, blue: 0 };
+
+extern esp_netif_t *espSTANetworkInterface;
 extern esp_netif_t* espAPNetworkInterface;
 
-typedef enum WifiControllerMessage {
-    startHTTPServer,
-    connectingFromHTTPServer,
-    staConnectedDidGetIP,
-} WifiControllerMessage;
-
-typedef struct WifiControllerMessageQueue {
-    enum WifiControllerMessage message;
-} WifiControllerMessageQueue;
+QueueHandle_t wifiControllerQueueHandle;
+esp_netif_t* wifiSTA = NULL;
+esp_netif_t* wifiAP = NULL;
 
 BaseType_t wifiControllerSendMessage(WifiControllerMessage message) {
     return 0;
+}
+
+void startWifiController(void) {
+    ESP_LOGI(tag, "Starting WifiController");
+    startLEDBlinking(250, wifiStartingColor);
 }
 
