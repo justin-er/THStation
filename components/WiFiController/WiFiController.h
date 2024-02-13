@@ -1,18 +1,13 @@
-// #include <stdio.h>
-// #include <freertos/FreeRTOS.h>
-// #include <freertos/task.h>
-
-// #include "esp_netif.h"
 #ifndef WiFiController_h
 #define WiFiController_h
 
-typedef enum {
+typedef enum WifiControllerMessageType {
     startHTTPServer,
     connectingFromHTTPServer,
     staConnectedDidGetIP,
 } WifiControllerMessageType;
 
-typedef struct {
+typedef struct WifiControllerMessage {
     WifiControllerMessageType messageType;
 } WifiControllerMessage;
 
