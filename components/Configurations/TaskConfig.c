@@ -18,3 +18,15 @@ TaskConfig wifiControllerTaskConfig = {
     .priority = 5,
     .coreID = 0
 };
+
+TaskConfig httpServerTaskConfig = {
+    .stackSize = 8192,
+    .priority = 4,
+    .coreID = 0
+};
+
+TaskConfig httpServerMonitorTaskConfig = {
+    .stackSize = 4096,
+    .priority = 3,
+    .coreID = 0
+};

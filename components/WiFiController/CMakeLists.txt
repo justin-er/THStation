@@ -1,5 +1,4 @@
-idf_component_register(
-    SRCS WiFiController.c
-    INCLUDE_DIRS .
-    REQUIRES esp_netif esp_wifi Configurations LEDController
-)
+
+idf_component_register(SRCS "WiFiController.c"
+                       INCLUDE_DIRS "."
+                       REQUIRES "esp_netif" "esp_wifi" "Configurations" "LEDController")

@@ -12,5 +12,7 @@ typedef struct {
 extern TaskConfig thReaderTaskConfig;
 extern TaskConfig ledControllerTaskConfig;
 extern TaskConfig wifiControllerTaskConfig;
+extern TaskConfig httpServerTaskConfig;
+extern TaskConfig httpServerMonitorTaskConfig;
 
 #endif 
