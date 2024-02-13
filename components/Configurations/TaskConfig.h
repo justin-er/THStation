@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#ifndef TASK_CONFIG_H
-#define TASK_CONFIG_H
+#ifndef TaskConfig_h
+#define TaskConfig_h
 
 typedef struct {
     int stackSize;
@@ -13,4 +13,4 @@ extern TaskConfig thReaderTaskConfig;
 extern TaskConfig ledControllerTaskConfig;
 extern TaskConfig wifiControllerTaskConfig;
 
-#endif // TASK_CONFIG_H
+#endif 

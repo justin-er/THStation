@@ -123,3 +123,21 @@ void blinkLEDHanlder(void *pvParameters) {
         vTaskDelay(pdMS_TO_TICKS(500));
     }
 }
+
+LEDColor redLED = {
+    red : 10,
+    green : 0,
+    blue : 0
+};
+
+LEDColor greenLED = {
+    red : 0,
+    green : 10,
+    blue : 0
+};
+
+LEDColor blueLED = {
+    red : 0,
+    green : 0,
+    blue : 1
+};

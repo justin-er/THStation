@@ -1,3 +1,5 @@
+#ifndef GPIOConfig_h
+#define GPIOConfig_h
 
 // List of GPIOS
 #define GPIO_00_free1                           00
@@ -49,3 +51,5 @@
 #define GPIO_46_free                            46
 #define GPIO_47_free                            47
 #define GPIO_Default_RGB_LED                    48
+
+#endif
