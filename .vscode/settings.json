@@ -11,7 +11,9 @@
     "dht.h": "c",
     "esp_wifi.h": "c",
     "esp_log.h": "c",
-    "functional": "c"
+    "functional": "c",
+    "esp_ota_ops.h": "c",
+    "esp_timer.h": "c"
 },
 "idf.port": "/dev/cu.usbmodem1101",
 "idf.flashType": "JTAG"

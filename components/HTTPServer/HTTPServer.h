@@ -26,7 +26,7 @@ typedef enum HTTPServerMessageType
 
 typedef struct HTTPServerMessage {
     HTTPServerMessageType message;
-} http_server_queue_message_t;
+} HTTPServerMessage;
 
 BaseType_t httpServerMonitorSendMessage(HTTPServerMessage message);
 void httpServerStart(void);

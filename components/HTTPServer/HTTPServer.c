@@ -1,0 +1,12 @@
+#include "esp_http_server.h"
+#include "esp_log.h"
+#include "esp_ota_ops.h"
+#include "esp_timer.h"
+#include "esp_wifi.h"
+#include "lwip/ip4_addr.h"
+#include "sys/param.h"
+
+#include "THReader.h"
+#include "HTTPServer.h"
+#include "TaskConfig.h"
+#include "WiFiController.h"
