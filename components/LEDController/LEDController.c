@@ -20,7 +20,7 @@
 typedef struct LEDBlinkModel LEDBlinkModel;
 
 struct LEDBlinkModel {
-    uint period;
+    uint32_t period;
     LEDColor color;
 };
 
@@ -75,7 +75,8 @@ void clearLED(void) {
     ESP_ERROR_CHECK(led_strip_clear(led_strip));    
 }
 
-void startLEDBlinking (uint period, struct LEDColor color) {
+void startLEDBlinking(uint32_t period, struct LEDColor color)
+{
     configLEDIfRequired();
 
     static struct LEDBlinkModel model;

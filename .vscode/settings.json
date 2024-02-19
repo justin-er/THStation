@@ -13,8 +13,17 @@
     "esp_log.h": "c",
     "functional": "c",
     "esp_ota_ops.h": "c",
-    "esp_timer.h": "c"
+    "esp_timer.h": "c",
+    "freertos.h": "c",
+    "task.h": "c",
+    "stdio.h": "c",
+    "generalconfig.h": "c",
+    "led_strip_interface.h": "c",
+    "chrono": "c"
 },
 "idf.port": "/dev/cu.usbmodem1101",
-"idf.flashType": "JTAG"
+"idf.flashType": "JTAG",
+"idf.espIdfPath": "/Users/amirrezaeghtedari/Documents/Technical/Espressif/esp/v5.2/esp-idf",
+"idf.toolsPath": "/Users/amirrezaeghtedari/Documents/Technical/Espressif/esp/.espressif",
+"C_Cpp.default.compilerPath": "/Users/amirrezaeghtedari/Documents/Technical/Espressif/esp/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin/xtensa-esp32s3-elf-g++"
 }
