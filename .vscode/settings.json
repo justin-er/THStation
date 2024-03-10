@@ -21,7 +21,7 @@
     "led_strip_interface.h": "c",
     "chrono": "c"
 },
-"idf.port": "/dev/cu.usbmodem1101",
+"idf.port": "/dev/cu.wlan-debug",
 "idf.flashType": "JTAG",
 "idf.espIdfPath": "/Users/amirrezaeghtedari/Documents/Technical/Espressif/esp/v5.2/esp-idf",
 "idf.toolsPath": "/Users/amirrezaeghtedari/Documents/Technical/Espressif/esp/.espressif",

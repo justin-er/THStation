@@ -87,7 +87,6 @@ void wifiTaskHanlder(void *pvParameters) {
     wifiControllerSendMessage(startHTTPServer);
 
     while(true) {
-
         if (xQueueReceive(wifiControllerQueueHandle, &message, portMAX_DELAY)) {
             switch (message.messageType) {
                 case startHTTPServer:
